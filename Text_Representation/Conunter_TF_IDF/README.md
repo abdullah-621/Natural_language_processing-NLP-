@@ -5,3 +5,8 @@
 | N-gram  | ❌        | ✅       | Very High | Language        |
 | TF-IDF  | ❌        | ❌       | High      | Search, ranking |
 | Custom  | Depends  | Depends | Low       | Small dataset   |
+
+
+BoW = “কতবার শব্দটা এসেছে?”
+
+TF-IDF = “এই শব্দটা কতটা special?”
