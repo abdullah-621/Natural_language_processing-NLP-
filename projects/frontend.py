@@ -8,23 +8,29 @@ st.title("This is sentiment analysis App")
 
 from_comment = st.radio("Select option : ", ['Own comment', 'From Data'])
 
+# Initialize session_state
+if "comment" not in st.session_state:
+  st.session_state["comment"] = ""
+
 if from_comment == 'Own comment':
-  comment = st.text_input("Enter your comment")
+  st.session_state["comment"] = st.text_input("Enter your comment", st.session_state.comment)
 else:
   file = st.file_uploader("Upload your csv files", type=['csv'])
 
   if file:
     df = pd.read_csv(file)
-    pick_comment = df.sample(1)
-    comment = pick_comment['review'].iloc[0]
 
-    st.subheader("Comment picked : ")
-    st.write(f"{comment}")
+    if st.button("pick random comment"):
+      pick_comment = df.sample(1)
+      st.session_state["comment"] = pick_comment['review'].iloc[0]
+
+      st.subheader("comment picked : ")
+    st.write(st.session_state.comment)
 
 if st.button("Predict"):
 
   input_data = {
-    "comment" : comment
+    "comment" : st.session_state["comment"]
   }
 
   try:
